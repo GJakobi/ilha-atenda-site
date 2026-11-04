@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Os Seguidores Viram Personagens · Ebook + 26 prompts</title>
+<meta name="description" content="Um guia em PDF pra criar, com IA, uma série animada em pixel-art em que quem segue entra na história e os comentários decidem o próximo episódio. Sem saber desenhar nem programar.">
+<!-- Gerado por ../build-site.py a partir de src/index.html e de ../pagina.md. Sem pixel (o produto não tem). -->
+<style>
+@font-face{font-family:"Nunito";src:url(fonts/Nunito-Regular.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:"Nunito";src:url(fonts/Nunito-Bold.ttf);font-weight:700;font-display:swap}
+@font-face{font-family:"Nunito";src:url(fonts/Nunito-ExtraBold.ttf);font-weight:800;font-display:swap}
+@font-face{font-family:"Pixel";src:url(fonts/PixelifySans-600.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:"Silk";src:url(fonts/Silkscreen-Bold.ttf);font-weight:700;font-display:swap}
+:root{--escuro:#1a1c2c;--navy:#29366f;--amarelo:#ffcd75;--laranja:#ef7d57;--verde:#38b764;--roxo:#5d275d;--ink:#1d2033;--muted:#566c86;--line:#E3DFD3;--papel:#fbfaf6;--creme:#F3EEE2}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--papel)}
+img,video{max-width:100%;display:block}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+h1,h2,h3{font-weight:800;line-height:1.2;margin:0 0 14px;color:var(--escuro)}
+h1{font-size:30px;color:#fff;letter-spacing:-.3px}
+h2{font-size:24px;padding-left:12px;border-left:5px solid var(--laranja)}
+h3{font-size:22px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 10px}
+strong{font-weight:800}
+.draft-banner{background:var(--laranja);color:#fff;text-align:center;font:600 13px/1.4 "Pixel",sans-serif;padding:8px 12px;letter-spacing:.3px}
+.draft-note{display:block;background:#FFF6D6;border:2px dashed #E0A800;color:#5A4500;font:700 13px/1.45 ui-monospace,monospace;padding:8px 10px;border-radius:8px;margin:10px 0}
+/* hero */
+.hero{background:var(--escuro);color:#DCE3F2;padding:28px 0 36px;border:0}
+.kicker{font:600 15px/1.4 "Pixel",sans-serif;letter-spacing:.6px;color:var(--amarelo);margin-bottom:12px}
+.hero .sub{font-size:17px;color:#DCE3F2}
+/* vídeo (9:16) */
+.vsl{position:relative;width:min(100%,360px,calc(42vh * 9 / 16));aspect-ratio:9/16;margin:22px auto 4px;border-radius:14px;overflow:hidden;background:#000;border:3px solid var(--amarelo);box-shadow:0 0 0 3px var(--escuro),0 8px 0 3px #000}
+.vsl video,.vsl iframe{width:100%;height:100%;object-fit:cover;border:0;image-rendering:pixelated}
+.vsl .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;font:700 18px/1.4 "Silk",monospace;color:var(--amarelo);background:repeating-linear-gradient(45deg,#1a1c2c 0 14px,#232640 14px 28px)}
+.vsl .ph small{font:600 14px/1.4 "Pixel",sans-serif;color:#94b0c2;margin-top:10px}
+.vsl-cap{text-align:center;font-size:13px;color:#94b0c2;margin:8px 0 0}
+.sound{position:absolute;right:10px;bottom:10px;background:rgba(26,28,44,.85);color:var(--amarelo);border:2px solid var(--amarelo);border-radius:10px;font:600 14px/1 "Pixel",sans-serif;padding:9px 12px;cursor:pointer}
+/* botões */
+.cta{display:block;text-align:center;background:var(--amarelo);color:var(--escuro);font:800 18px/1.25 "Nunito",sans-serif;text-decoration:none;padding:18px 16px;border-radius:14px;box-shadow:0 6px 0 #C9963F;margin:20px 0 10px;text-transform:uppercase;letter-spacing:.2px}
+.cta:active{transform:translateY(3px);box-shadow:0 3px 0 #C9963F}
+.cta-small{display:block;text-align:center;font-size:14px;color:var(--muted)}
+.hero .cta-small,.final .cta-small{color:#AFC0E0}
+/* blocos */
+.worlds{list-style:none;padding:0;display:grid;gap:10px}
+.worlds li{background:#fff;border:1px solid var(--line);border-left:5px solid var(--verde);border-radius:12px;padding:12px 14px;margin:0}
+.chapters{list-style:none;padding:0;counter-reset:c -1}
+.chapters li{counter-increment:c;position:relative;padding:12px 12px 12px 54px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.chapters li::before{content:counter(c);position:absolute;left:12px;top:10px;width:30px;height:30px;border-radius:6px;background:var(--escuro);color:var(--amarelo);font:700 14px/30px "Silk",monospace;text-align:center}
+.chapters em{color:var(--muted);font-style:normal;font-size:14px}
+.note{font-size:15px;color:var(--muted)}
+.guarantee{background:var(--creme)}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin:0 0 10px;padding:0 16px}
+.faq summary{cursor:pointer;font-weight:800;padding:14px 0;list-style:none;color:var(--escuro)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.final{background:var(--escuro);border:0}
+.final h3{color:#fff;font-size:24px}
+footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:14px;color:var(--muted);text-align:center}
+footer p{margin:0 0 6px}footer a{color:var(--muted);text-decoration-thickness:1px;text-underline-offset:2px}
+@media (min-width:760px){h1{font-size:40px}section{padding:60px 0}.worlds{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- Dobra 1 -->
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Ebook + 26 prompts · ChatGPT ou Claude</div>
+    <h1>Faça uma série de Reels em que os seus seguidores viram personagens</h1>
+    <p class="sub">Um guia em PDF pra criar, com IA, uma série animada em pixel-art em que quem segue entra na história e os comentários decidem o próximo episódio. Sem saber desenhar nem programar.</p>
+    <div class="vsl" id="vsl-video"><video src="video/trecho-ep01.mp4" poster="video/trecho-ep01.jpg" autoplay muted loop playsinline preload="auto" aria-label="Trecho de um episódio da série"></video></div>
+    <a class="cta" href="https://pay.kiwify.com.br/LcB04qZ?utm_source=instagram&amp;utm_medium=bio&amp;utm_campaign=ilha-dos-seguidores&amp;utm_content=vsl-topo" data-checkout="vsl-topo">Quero criar a minha série</a>
+    <span class="cta-small">R$&nbsp;97 · pagamento único · cartão ou Pix · 7 dias de garantia</span>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Você já viu isso funcionar aqui</h2>
+    <p>Você chegou por um perfil que usa esse formato: uma ilha em que cada seguidor é um náufrago. O livro não é sobre a ilha. Ele ensina o formato pra você criar o <strong>seu</strong> mundo, com o tema que tiver a ver com você.</p>
+    <p>O livro usa três exemplos inventados pra mostrar que serve pra qualquer tema:</p>
+    <ul class="worlds">
+      <li><strong>Estação Órbita-7:</strong> cada seguidor é um tripulante que acorda da criogenia numa estação espacial abandonada.</li>
+      <li><strong>Prédio 404:</strong> cada seguidor se muda pra um prédio antigo, onde um andar não aparece no elevador.</li>
+      <li><strong>Vila do Poço Seco:</strong> cada seguidor chega a uma vila no deserto, que cresce enquanto procura água.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Isso não é curso de "viralizar"</h2>
+    <p>É um passo a passo de <strong>produção</strong>, da ideia do mundo até o episódio postado, e de volta pros comentários. O livro não promete views, seguidores nem renda. Ninguém controla o algoritmo.</p>
+    <p>E a série pode começar pequena: no primeiro episódio a sua página pode ter dois seguidores. O formato foi feito pra isso, porque o mundo começa vazio e cresce junto com a página.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que você vai aprender: 14 capítulos, na ordem em que um episódio é feito</h2>
+    <p>Cada capítulo termina com os prompts daquela etapa, prontos pra colar no ChatGPT ou no Claude.</p>
+    <ol class="chapters">
+      <li><strong>Introdução.</strong> Do que você precisa, os dois caminhos (R$&nbsp;0 ou barato) e quanto tempo leva.</li>
+      <li><strong>O formato por dentro.</strong> As seis peças de todo episódio: o gancho com o número real, o mapa e o zoom, as cenas curtas, os personagens que vieram dos comentários, o cliffhanger e a pergunta final. <em>(P1, P2)</em></li>
+      <li><strong>A bíblia do mundo.</strong> O documento que mantém a história coerente episódio após episódio. <em>(P3, P4)</em></li>
+      <li><strong>Seguidor vira personagem.</strong> Como o número de seguidores vira acontecimento na história, e o registro do estado do mundo. <em>(P5, P6)</em></li>
+      <li><strong>O roteiro.</strong> Cenas curtas, nomes, cliffhanger e a pergunta que decide o próximo episódio. <em>(P7, P8)</em></li>
+      <li><strong>Dos comentários aos personagens.</strong> A planilha e os critérios pra escolher quem entra, sem bagunçar a história. <em>(P9, P10)</em></li>
+      <li><strong>Arte em pixel sem saber desenhar.</strong> Pacotes grátis da Kenney, o editor Piskel, trocar a paleta e exportar no tamanho do Reels. <em>(P11, P12)</em></li>
+      <li><strong>Texto na tela que dá pra ler.</strong> Fonte pixel, contorno, legenda palavra a palavra e o teste no celular. <em>(P13)</em></li>
+      <li><strong>A voz.</strong> A sua voz de graça ou voz de IA, teste de pronúncia dos nomes e o gancho gravado à parte. <em>(P14, P15)</em></li>
+      <li><strong>Música e efeitos.</strong> Onde achar, o que a licença deixa e como anotar o que você usou. <em>(P16)</em></li>
+      <li><strong>Montar no Remotion.</strong> O "molde" do episódio, feito uma vez; a IA escreve o código. <em>(P17, P18, P19)</em></li>
+      <li><strong>Checagem antes de postar.</strong> Um quadro por cena, transcrição do áudio comparada com o roteiro, volume. <em>(P20, P21)</em></li>
+      <li><strong>Postar e fechar o ciclo.</strong> Conferir o número, capa, legenda com créditos e métricas anotadas sem inventar. <em>(P22, P23)</em></li>
+      <li><strong>Rotina com agentes.</strong> Três agentes de IA (roteiro, produção e publicação), com você aprovando nos pontos que importam. <em>(P24, P25, P26)</em></li>
+    </ol>
+    <a class="cta" href="https://pay.kiwify.com.br/LcB04qZ?utm_source=instagram&amp;utm_medium=bio&amp;utm_campaign=ilha-dos-seguidores&amp;utm_content=vsl-meio" data-checkout="vsl-meio">Quero criar a minha série · R$&nbsp;97</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Bônus (num .zip, junto com o livro)</h2>
+    <ul>
+      <li><strong>Modo Agente.</strong> As regras da série num arquivo só, escritas pra IA ler, com um modo guia. Você sobe esse arquivo e o TODOS-OS-PROMPTS num Projeto do Claude ou do ChatGPT (ou anexa numa conversa), escreve "Vamos começar", e a IA te leva etapa por etapa até o post.</li>
+      <li><strong>Os 26 prompts em arquivo,</strong> um por arquivo e todos juntos, em .md e .txt.</li>
+      <li><strong>Modelos:</strong> bíblia do mundo (modelo + exemplos inventados), registro do estado do mundo, roteiro (modelo + exemplo), legenda, ficha de comentários, banco de ideias, métricas e registro de licenças. As planilhas (.csv) abrem no Google Planilhas e no Excel.</li>
+      <li><strong>Checklists:</strong> do gancho, da checagem antes de postar e do post.</li>
+      <li><strong>Links de sons e música</strong> grátis, com a licença de cada um. (Os arquivos de som não vêm no pacote, porque a licença não deixa redistribuir.)</li>
+    </ul>
+    <p class="note">Os 26 prompts e o modo guia foram testados em 03/11/2026 com um assistente de IA e funcionaram. Cada app de IA pode responder um pouco diferente.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que você precisa (sem letra miúda)</h2>
+    <ul>
+      <li><strong>Um computador</strong> com Windows, Mac ou Linux. O vídeo é gerado nele, com o Remotion. <strong>Pelo celular não dá.</strong></li>
+      <li><strong>Uma conta grátis no ChatGPT ou no Claude.</strong> A IA escreve o roteiro, organiza os comentários e escreve o código da montagem. Aviso: o limite do plano grátis costuma acabar no meio da montagem.</li>
+      <li><strong>Um navegador</strong>, pra usar o Piskel (editor de pixel-art grátis).</li>
+      <li><strong>Um microfone razoável ou o fone do celular</strong>, se for usar a sua voz.</li>
+      <li><strong>Abrir o terminal</strong> e seguir instruções com calma. Não precisa saber programar: o código quem escreve é a IA.</li>
+      <li><strong>Paciência no primeiro episódio.</strong> Você monta o mundo, a arte e o molde do vídeo uma vez. Depois, conte com algumas horas por episódio. O livro não dá um número exato, porque depende do seu mundo e da sua máquina.</li>
+    </ul>
+    <p><strong>Dois caminhos de custo:</strong></p>
+    <ul>
+      <li><strong>R$&nbsp;0:</strong> arte da Kenney (CC0) + Piskel, fontes Pixelify Sans ou Silkscreen, a sua voz, música e efeitos da Mixkit, montagem no Remotion (grátis pra pessoa física e empresa de até 3 funcionários) e IA no plano grátis.</li>
+      <li><strong>Barato:</strong> o mesmo, trocando o Piskel pelo Aseprite (R$&nbsp;67,99 na Steam Brasil, pago uma vez) e a voz pelo ElevenLabs Starter (a partir de US$&nbsp;6/mês). O plano grátis do ElevenLabs não permite uso comercial.</li>
+    </ul>
+    <p class="note">Preços e licenças conferidos em 03/11/2026. Eles mudam; o livro ensina a conferir.</p>
+    <p><strong>Não vem:</strong> código ou template pronto pra copiar. A IA gera o código do <strong>seu</strong> projeto.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Como você recebe</h2>
+    <ul>
+      <li>Pagou, recebe o acesso na hora, por e-mail, na <strong>área de membros da Kiwify</strong>.</li>
+      <li>Lá tem duas aulas, as duas liberadas na hora: o <strong>ebook em PDF (72 páginas)</strong> e o <strong>bônus em .zip</strong> (prompts, modelos, checklists e Modo Agente). Comece pelo LEIA-ME do bônus.</li>
+      <li>Pagamento único de R$&nbsp;97, no cartão (até 12x) ou no Pix.</li>
+    </ul>
+
+  </div>
+</section>
+
+<section class="guarantee">
+  <div class="wrap">
+    <h2>Garantia de 7 dias</h2>
+    <p>Leu, testou e viu que não é pra você? Dentro de 7 dias você pede o reembolso pela Kiwify.</p>
+
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>Perguntas frequentes</h2>
+    <details><summary>Vou viralizar? Vou ganhar seguidores ou dinheiro?</summary><p>Não dá pra prometer isso, e desconfie de quem promete. O livro ensina a produzir a série e repetir o ciclo. O alcance depende do seu tema, da sua constância e de coisas que ninguém controla.</p></details>
+    <details><summary>Preciso saber desenhar?</summary><p>Não. A arte vem de pacotes prontos e gratuitos, que você recolore e adapta no Piskel. O capítulo 6 mostra o passo a passo.</p></details>
+    <details><summary>Preciso saber programar?</summary><p>Não. A IA escreve o código da montagem. Você vai abrir o terminal e seguir as instruções que ela passar. O capítulo 10 e os prompts P17 a P19 cuidam disso, inclusive de quando der erro.</p></details>
+    <details><summary>Dá pra fazer só pelo celular?</summary><p>Não. A montagem do vídeo roda no computador (Windows, Mac ou Linux). O celular serve pra gravar a sua voz e pra testar se o texto está legível.</p></details>
+    <details><summary>Preciso pagar ChatGPT ou Claude?</summary><p>Não é obrigatório: dá pra usar o plano grátis. Mas o limite do chat grátis costuma acabar no meio da montagem, então pode ser que você precise continuar no dia seguinte.</p></details>
+    <details><summary>Quanto vou gastar com ferramentas?</summary><p>R$&nbsp;0 no caminho grátis. No caminho barato, o Aseprite (R$&nbsp;67,99, uma vez) e o ElevenLabs Starter (a partir de US$&nbsp;6/mês). Preços conferidos em 03/11/2026.</p></details>
+    <details><summary>Quanto tempo leva um episódio?</summary><p>O primeiro é o mais lento, porque você monta o mundo, a arte e o molde. Depois, algumas horas por episódio. O livro pede pra você marcar no relógio os primeiros, porque é o único número que vale pra você.</p></details>
+    <details><summary>E se a minha página tiver poucos seguidores?</summary><p>O formato foi feito pra isso. O episódio abre com o número real de seguidores, e o mundo começa vazio e cresce junto com a página.</p></details>
+    <details><summary>Não quero ler o livro inteiro. Tem atalho?</summary><p>Tem o Modo Agente: você sobe o arquivo na sua IA e ela te guia etapa por etapa. Ainda assim, leia pelo menos os capítulos 2 (a bíblia) e 5 (comentários): a IA ajuda, mas quem decide o que entra na história é você.</p></details>
+    <details><summary>E se eu não gostar?</summary><p>Garantia de 7 dias pela Kiwify.</p></details>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h3>O seu primeiro episódio começa no capítulo 1.</h3>
+    <a class="cta" href="https://pay.kiwify.com.br/LcB04qZ?utm_source=instagram&amp;utm_medium=bio&amp;utm_campaign=ilha-dos-seguidores&amp;utm_content=vsl-final" data-checkout="vsl-final">Quero criar a minha série · R$&nbsp;97</a>
+    <span class="cta-small">Pagamento único · cartão ou Pix · acesso na hora · 7 dias de garantia</span>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Atenda Tech · CNPJ 68.392.339/0001-14 · Suporte: <a href="mailto:contato@atenda.tech">contato@atenda.tech</a></p>
+    <p><a href="termos/">Termos de uso</a> · <a href="privacidade/">Política de privacidade</a></p>
+  </div>
+</footer>
+
+<script>
+/* Repassa a origem da visita para os botões do checkout da Kiwify.
+   - Cada botão já vem com utm_source/medium/campaign padrão + o próprio utm_content (vsl-topo/meio/final).
+   - Se a página abrir com utm_source, utm_medium, utm_campaign ou utm_term, eles substituem os padrões
+     (os três padrões saem juntos, pra não misturar origem nova com padrão antigo).
+   - Qualquer outro utm_* e os parâmetros que a Kiwify aceita (src, sck, s1, s2, s3) também são repassados.
+   - O utm_content do botão sempre vence o da URL da página. */
+(function(){
+  var here=new URLSearchParams(location.search), inc=[];
+  here.forEach(function(v,k){ k=k.toLowerCase(); if(v && k!=="utm_content" && (k.indexOf("utm_")===0 || ["src","sck","s1","s2","s3"].indexOf(k)>-1)) inc.push([k,v]); });
+  var hasOrigin=inc.some(function(p){return ["utm_source","utm_medium","utm_campaign"].indexOf(p[0])>-1;});
+  document.querySelectorAll("a[data-checkout]").forEach(function(a){
+    var u=new URL(a.getAttribute("href")); u.searchParams.delete("utm_content");
+    if(hasOrigin){ ["utm_source","utm_medium","utm_campaign"].forEach(function(k){u.searchParams.delete(k);}); }
+    inc.forEach(function(p){ u.searchParams.set(p[0],p[1]); });
+    u.searchParams.set("utm_content",a.getAttribute("data-checkout"));
+    a.href=u.toString();
+  });
+  var v=document.querySelector(".vsl video"), b=document.querySelector(".vsl .sound");
+  if(v&&b){ b.addEventListener("click",function(){ v.muted=!v.muted; if(!v.muted){v.currentTime=0;v.play();} b.textContent=v.muted?"▶ ativar som":"🔇 tirar som"; }); }
+})();
+</script>
+</body>
+</html>
