@@ -1,0 +1,30 @@
+ok   arquivo local existe: poster.jpg
+ok   arquivo local existe: vsl.mp4
+ok   arquivo local existe: ../termos/
+ok   arquivo local existe: ../privacidade/
+ok   arquivo local existe: ../assets/checkout.js
+ok   âncora existe: #oferta
+ok   não há links externos http(s) na página
+ok   e-mail de suporte correto
+ok   nenhuma menção a kiwify, pay. ou checkout do ebook
+ok   meta checkout-url existe e está vazia
+ok   há 4 botões de compra (topo, oferta, final, barra)
+ok   botão vsl-topo está desativado e não é link
+ok   botão oferta está desativado e não é link
+ok   botão vsl-final está desativado e não é link
+ok   botão barra está desativado e não é link
+ok   nenhum <a> leva a checkout
+ok   preço R$ 97, garantia de 7 dias e 1 ano de atualizações
+ok   vídeo com controles de som, playsinline e poster
+ok   vídeo pesa menos de 12 MB e tem faststart
+ok   não cita Remotion no texto de venda fora do aviso de licença
+ok   sem URL base, o botão fica desativado (null)
+ok   repassa utm_source, utm_medium, utm_campaign e utm_term
+ok   repassa src, sck, s1, s2 e s3
+ok   utm_content do botão vence o da página
+ok   cada botão recebe o próprio utm_content
+ok   parâmetros sem relação não vazam
+ok   mantém parâmetros que já estavam na URL base
+ok   valores com acento e espaço são codificados
+
+28 passaram, 0 falharam
