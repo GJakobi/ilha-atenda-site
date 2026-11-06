@@ -1,5 +1,5 @@
 // Roda com: node tests/check-motor-pixel.mjs
-// Confere links locais, botões de compra desativados e repasse de UTMs.
+// Confere links locais, o checkout do Motor Pixel e o repasse de UTMs.
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -46,14 +46,15 @@ for (const a of anchors) {
 t("não há links externos http(s) na página", () => assert.deepEqual(external, []));
 t("e-mail de suporte correto", () => assert.deepEqual(mail, ["mailto:contato@atenda.tech"]));
 
-// ---------- 2. compra desativada, sem checkout do ebook ----------
-t("nenhuma menção a kiwify, pay. ou checkout do ebook", () => {
-  assert.ok(!/kiwify|pay\.kiwify|LcB04qZ/i.test(html));
-});
-t("meta checkout-url existe e está vazia", () => {
+// ---------- 2. checkout do Motor Pixel; o do ebook não entra nesta página ----------
+const CHECKOUT = "https://pay.kiwify.com.br/xDfB7ss";
+t("meta checkout-url é o checkout ao vivo do Motor Pixel", () => {
   const m = html.match(/<meta name="checkout-url" content="([^"]*)">/);
   assert.ok(m, "meta ausente");
-  assert.equal(m[1], "");
+  assert.equal(m[1], CHECKOUT);
+});
+t("a página não usa o checkout do ebook", () => {
+  assert.ok(!/LcB04qZ/.test(html));
 });
 const buyButtons = [...html.matchAll(/<button[^>]*data-checkout="([^"]+)"[^>]*>/g)];
 t("há 4 botões de compra (topo, oferta, final, barra)", () => {
@@ -97,6 +98,19 @@ t("não cita Remotion no texto de venda fora do aviso de licença", () => {
 
 // ---------- 4. UTMs ----------
 const BASE = "https://checkout.exemplo.test/pay/abc";
+t("a URL da meta repassa UTMs e marca o botão em utm_content", () => {
+  const search = "?utm_source=instagram&utm_medium=bio&utm_campaign=motor&utm_term=pixel&src=a&sck=b&email=nao@deve";
+  const u = new URL(buildCheckoutUrl(CHECKOUT, search, "vsl-topo"));
+  assert.equal(u.origin + u.pathname, "https://pay.kiwify.com.br/xDfB7ss");
+  assert.equal(u.searchParams.get("utm_source"), "instagram");
+  assert.equal(u.searchParams.get("utm_medium"), "bio");
+  assert.equal(u.searchParams.get("utm_campaign"), "motor");
+  assert.equal(u.searchParams.get("utm_term"), "pixel");
+  assert.equal(u.searchParams.get("src"), "a");
+  assert.equal(u.searchParams.get("sck"), "b");
+  assert.equal(u.searchParams.get("utm_content"), "vsl-topo");
+  assert.equal(u.searchParams.get("email"), null);
+});
 t("sem URL base, o botão fica desativado (null)", () => {
   assert.equal(buildCheckoutUrl("", "?utm_source=ig", "vsl-topo"), null);
 });
