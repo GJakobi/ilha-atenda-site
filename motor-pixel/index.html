@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Motor Pixel · Kit para criar vídeos pixel art com o Claude ou o ChatGPT</title>
+<meta name="description" content="Kit com a Skill, o andaime e o manual para o Claude ou o ChatGPT construir um vídeo curto em pixel art no seu tema. R$ 97, pagamento único, 7 dias de garantia e 1 ano de atualizações.">
+<meta name="theme-color" content="#1a1c2c">
+<!-- Enquanto o checkout novo não existir, deixe vazio: os botões de compra ficam desativados. -->
+<meta name="checkout-url" content="">
+<link rel="preload" as="image" href="poster.jpg">
+<style>
+@font-face{font-family:"Nunito";src:url(../fonts/Nunito-Regular.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:"Nunito";src:url(../fonts/Nunito-Bold.ttf);font-weight:700;font-display:swap}
+@font-face{font-family:"Nunito";src:url(../fonts/Nunito-ExtraBold.ttf);font-weight:800;font-display:swap}
+@font-face{font-family:"Pixel";src:url(../fonts/PixelifySans-600.ttf);font-weight:600;font-display:swap}
+@font-face{font-family:"Silk";src:url(../fonts/Silkscreen-Bold.ttf);font-weight:700;font-display:swap}
+:root{--escuro:#1a1c2c;--navy:#29366f;--amarelo:#ffcd75;--laranja:#ef7d57;--verde:#38b764;--ink:#1d2033;--muted:#566c86;--line:#E3DFD3;--papel:#fbfaf6;--creme:#F3EEE2;--vermelho:#d9534f}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.6;color:var(--ink);background:var(--papel)}
+img,video{max-width:100%;display:block}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+h1,h2,h3{font-weight:800;line-height:1.2;margin:0 0 14px;color:var(--escuro)}
+h1{font-size:30px;color:#fff;letter-spacing:-.3px}
+h2{font-size:24px;padding-left:12px;border-left:5px solid var(--laranja)}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin:0 0 10px}
+strong{font-weight:800}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px 12px;z-index:50}
+/* hero */
+.hero{background:var(--escuro);color:#DCE3F2;padding:26px 0 34px;border:0}
+.kicker{font:600 15px/1.4 "Pixel",sans-serif;letter-spacing:.6px;color:var(--amarelo);margin-bottom:12px}
+.hero .sub{font-size:18px;color:#DCE3F2}
+/* vídeo 9:16 */
+.vsl{position:relative;width:min(100%,360px,calc(68vh * 9 / 16));aspect-ratio:9/16;margin:22px auto 6px;border-radius:14px;overflow:hidden;background:#000;border:3px solid var(--amarelo);box-shadow:0 0 0 3px var(--escuro),0 8px 0 3px #000}
+.vsl video{width:100%;height:100%;object-fit:cover;background:#000}
+.sound{position:absolute;inset:auto 0 0 0;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 12px;border:0;cursor:pointer;color:var(--escuro);background:var(--amarelo);font:800 16px/1.2 "Nunito",sans-serif;text-transform:uppercase;letter-spacing:.2px}
+.sound[hidden]{display:none}
+.sound .dot{width:12px;height:12px;background:var(--escuro);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.15}}
+.vsl-cap{text-align:center;font-size:13px;color:#94b0c2;margin:10px 0 0}
+/* botões de compra (desativados até existir checkout) */
+.cta{display:block;width:100%;text-align:center;background:var(--amarelo);color:var(--escuro);font:800 18px/1.25 "Nunito",sans-serif;border:0;padding:18px 16px;border-radius:14px;box-shadow:0 6px 0 #C9963F;margin:20px 0 10px;text-transform:uppercase;letter-spacing:.2px;cursor:pointer}
+.cta:active:not(:disabled){transform:translateY(3px);box-shadow:0 3px 0 #C9963F}
+.cta:disabled{background:#cfc9b8;color:#5b5a52;box-shadow:0 6px 0 #a9a392;cursor:not-allowed}
+.cta-small{display:block;text-align:center;font-size:14px;color:var(--muted)}
+.hero .cta-small,.final .cta-small{color:#AFC0E0}
+.soon{display:block;text-align:center;font:600 13px/1.4 "Pixel",sans-serif;color:var(--laranja);margin-top:4px}
+/* blocos */
+.cards{list-style:none;padding:0;display:grid;gap:12px}
+.cards li{background:#fff;border:1px solid var(--line);border-left:5px solid var(--verde);border-radius:12px;padding:14px 16px;margin:0}
+.cards li:nth-child(2){border-left-color:var(--navy)}
+.cards li:nth-child(3){border-left-color:var(--laranja)}
+.tag{display:block;font:700 12px/1 "Silk",monospace;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+.steps{list-style:none;padding:0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:12px 12px 12px 54px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.steps li::before{content:counter(s);position:absolute;left:12px;top:12px;width:30px;height:30px;border-radius:6px;background:var(--escuro);color:var(--amarelo);font:700 14px/30px "Silk",monospace;text-align:center}
+.need li::marker{color:var(--verde)}
+.warn{background:#FFF6D6;border:2px solid #E0A800;border-radius:12px;padding:12px 14px;color:#5A4500;font-size:16px}
+.no li::marker{color:var(--vermelho)}
+.note{font-size:15px;color:var(--muted)}
+.offer{background:var(--escuro);color:#DCE3F2;border:0}
+.offer h2{color:#fff}
+.price{font:600 56px/1 "Pixel",sans-serif;color:var(--amarelo);margin:6px 0 4px}
+.offer ul{list-style:none;padding:0}
+.offer li{padding-left:28px;position:relative}
+.offer li::before{content:"";position:absolute;left:4px;top:.55em;width:12px;height:12px;background:var(--verde)}
+.guarantee{background:var(--creme)}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin:0 0 10px;padding:0 16px}
+.faq summary{cursor:pointer;font-weight:800;padding:14px 0;list-style:none;color:var(--escuro)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";float:right;font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.final{background:var(--escuro);border:0}
+.final h2{color:#fff}
+footer{padding:22px 0 110px;font-size:14px;color:var(--muted);text-align:center}
+footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
+/* barra fixa no celular */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(26,28,44,.97);border-top:3px solid var(--amarelo);padding:10px 14px calc(10px + env(safe-area-inset-bottom));display:flex;gap:12px;align-items:center;transform:translateY(110%);transition:transform .25s}
+.bar.on{transform:none}
+.bar .p{color:#fff;font:600 22px/1 "Pixel",sans-serif;white-space:nowrap}
+.bar .p small{display:block;font:700 11px/1.2 "Nunito",sans-serif;color:#AFC0E0;margin-top:3px}
+.bar .cta{margin:0;padding:13px 10px;font-size:15px;box-shadow:0 4px 0 #a9a392}
+@media (min-width:760px){h1{font-size:40px}section{padding:60px 0}.cards{grid-template-columns:1fr 1fr 1fr}.bar{display:none}footer{padding-bottom:40px}}
+@media (prefers-reduced-motion:reduce){.sound .dot{animation:none}html{scroll-behavior:auto}.bar{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#oferta">Ir para a oferta</a>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Kit para Claude ou ChatGPT · pixel art</div>
+    <h1>Faça o Claude ou o ChatGPT criar vídeos curtos em pixel art no seu tema</h1>
+    <p class="sub">O Motor Pixel traz a Skill, o andaime e o manual que guiam o Claude ou o ChatGPT, na sua máquina, a construir o motor, a arte e a voz do seu vídeo.</p>
+
+    <div class="vsl" id="vsl">
+      <video id="vsl-video" src="vsl.mp4" poster="poster.jpg" muted playsinline preload="metadata" aria-label="Vídeo de apresentação do Motor Pixel"></video>
+      <button class="sound" id="sound" type="button" hidden><span class="dot" aria-hidden="true"></span>Toque para ouvir</button>
+    </div>
+    <p class="vsl-cap">Vídeo de 52 s · com legenda</p>
+
+    <button class="cta" type="button" disabled aria-disabled="true" data-checkout="vsl-topo">Quero o Motor Pixel</button>
+    <span class="soon">Checkout em breve</span>
+    <span class="cta-small">R$&nbsp;97 · pagamento único · 7 dias de garantia · atualizações por 1 ano</span>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que vem no ZIP</h2>
+    <ul class="cards">
+      <li><span class="tag">SKILL</span><strong>Motor Pixel</strong><br>As instruções que o Claude ou o ChatGPT segue, passo a passo, do tema ao render.</li>
+      <li><span class="tag">ANDAIME</span><strong>Projeto base</strong><br>Um projeto mínimo com os formatos de dados e um validador, pronto para o assistente construir em cima.</li>
+      <li><span class="tag">MANUAL</span><strong>Guia de instalação</strong><br>Do que instalar ao primeiro comando, com as licenças explicadas.</li>
+    </ul>
+    <p class="note">As cenas do vídeo acima são da série Ilha dos Seguidores. Elas não vêm no ZIP. O resultado varia com o tema e com a arte que o Claude ou o ChatGPT criar.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Como funciona</h2>
+    <ol class="steps">
+      <li><strong>Descompacte o ZIP</strong> e rode a instalação do manual.</li>
+      <li><strong>Entregue a Skill ao Claude ou ao ChatGPT</strong> e descreva o seu tema, a cena, os personagens e a duração.</li>
+      <li><strong>O assistente constrói</strong> o motor, a arte e a voz, e renderiza o MP4 na sua máquina.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que você precisa</h2>
+    <ul class="need">
+      <li><strong>Claude Code</strong>, <strong>Claude Desktop com execução de código</strong> ou <strong>ChatGPT com execução de código (Codex)</strong>. O uso do Claude ou do ChatGPT é por sua conta, direto na Anthropic ou na OpenAI.</li>
+      <li>Um <strong>computador com terminal</strong>, Node.js 18+, npm, Python 3.9+ e FFmpeg.</li>
+      <li><strong>Internet</strong> na instalação (pacotes npm e, na primeira renderização, um navegador).</li>
+    </ul>
+    <div class="warn">
+      <strong>Sem letra miúda:</strong> o kit foi testado em <strong>Linux</strong>. Windows e macOS não foram testados pelo autor. Não roda só no chat do celular nem em chat na web sem terminal.
+    </div>
+    <p style="margin-top:14px"><strong>O que não vem no ZIP:</strong></p>
+    <ul class="no">
+      <li>Um motor de animação pronto. O assistente constrói o seu.</li>
+      <li>Imagens, sprites, roteiros, áudio ou vídeo prontos.</li>
+      <li>Promessa de views, seguidores ou renda.</li>
+    </ul>
+    <p class="note">O kit usa o Remotion, que tem licença própria e pode exigir licença paga para empresas maiores. A licença de cada ferramenta e fonte que você usar é de sua responsabilidade. O ZIP traz o arquivo LICENCAS.md.</p>
+  </div>
+</section>
+
+<section class="offer" id="oferta">
+  <div class="wrap">
+    <h2>A oferta</h2>
+    <div class="price">R$&nbsp;97</div>
+    <p>Pagamento único. Sem mensalidade do kit.</p>
+    <ul>
+      <li>ZIP com a Skill, o andaime e o manual</li>
+      <li>Atualizações do ZIP por <strong>1 ano</strong>, na área onde você baixa o pacote</li>
+      <li><strong>7 dias de garantia</strong>: não gostou, recebe de volta o que pagou</li>
+    </ul>
+    <button class="cta" type="button" disabled aria-disabled="true" data-checkout="oferta">Quero o Motor Pixel · R$&nbsp;97</button>
+    <span class="soon">Checkout em breve</span>
+  </div>
+</section>
+
+<section class="guarantee">
+  <div class="wrap">
+    <h2>Garantia de 7 dias</h2>
+    <p>Baixou, leu e viu que não é para você? Em até 7 dias da compra, peça o reembolso e receba 100% do que pagou. Não precisa explicar o motivo.</p>
+    <p class="note">As atualizações não têm calendário fixo nem conteúdo prometido a cada versão.</p>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>Perguntas frequentes</h2>
+    <details><summary>Funciona no Claude e no ChatGPT?</summary><p>Funciona nos dois, desde que o assistente tenha execução de código com terminal real: Claude Code, Claude Desktop com execução de código ou ChatGPT com execução de código (Codex). Em um chat comum, sem terminal, o kit não arranca.</p></details>
+    <details><summary>Preciso saber programar?</summary><p>Você não precisa escrever código: o assistente escreve. Mas precisa instalar Node.js e FFmpeg e rodar alguns comandos no terminal. O manual mostra cada um.</p></details>
+    <details><summary>Já vem um vídeo pronto?</summary><p>Não. O ZIP traz o andaime e as instruções. O assistente constrói o motor e a arte no seu tema e renderiza o vídeo na sua máquina.</p></details>
+    <details><summary>Funciona no Windows ou no Mac?</summary><p>O kit foi testado em Linux. Windows e macOS não foram testados pelo autor, então não dá para garantir.</p></details>
+    <details><summary>Dá para fazer só pelo celular?</summary><p>Não. É preciso um computador com terminal, Node.js e FFmpeg.</p></details>
+    <details><summary>Vou viralizar ou ganhar dinheiro com isso?</summary><p>Não dá para prometer. O kit ajuda a produzir o vídeo. O alcance depende do seu tema, da sua constância e de coisas que ninguém controla.</p></details>
+    <details><summary>A voz vem incluída?</summary><p>Não vem áudio. O manual documenta uma opção gratuita de voz, o cliente edge-tts, que você instala por conta própria e que tem a própria licença.</p></details>
+    <details><summary>Posso usar os vídeos para vender ou postar?</summary><p>A responsabilidade de conferir as licenças das ferramentas, fontes, vozes e músicas é sua. O ZIP explica o que checar, mas não é parecer jurídico.</p></details>
+    <details><summary>E se eu não gostar?</summary><p>Garantia de 7 dias, com reembolso de 100%.</p></details>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Seu primeiro vídeo pixel começa no tema.</h2>
+    <button class="cta" type="button" disabled aria-disabled="true" data-checkout="vsl-final">Quero o Motor Pixel · R$&nbsp;97</button>
+    <span class="soon">Checkout em breve</span>
+    <span class="cta-small">Pagamento único · 7 dias de garantia · atualizações por 1 ano</span>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Atenda Tech · CNPJ 68.392.339/0001-14 · Suporte: <a href="mailto:contato@atenda.tech">contato@atenda.tech</a></p>
+    <p><a href="../termos/">Termos de uso</a> · <a href="../privacidade/">Política de privacidade</a></p>
+  </div>
+</footer>
+
+<div class="bar" id="bar" aria-hidden="true">
+  <div class="p">R$&nbsp;97<small>pagamento único</small></div>
+  <button class="cta" type="button" disabled aria-disabled="true" tabindex="-1" data-checkout="barra">Compra em breve</button>
+</div>
+
+<script src="../assets/checkout.js"></script>
+<script>
+(function(){
+  var v=document.getElementById("vsl-video"), s=document.getElementById("sound");
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Vídeo: começa mudo (legenda no vídeo) e pede um toque para ligar o som. */
+  function showSound(){ s.hidden=false; }
+  if(!reduce){
+    var p=v.play(); if(p&&p.catch){ p.catch(function(){ v.controls=true; }); }
+    showSound();
+  }else{ v.controls=true; }
+  s.addEventListener("click",function(){
+    v.muted=false; v.currentTime=0; v.controls=true; v.play(); s.hidden=true;
+  });
+  v.addEventListener("ended",function(){ v.controls=true; });
+
+  /* Botões de compra: só ativam quando houver URL de checkout. */
+  var url=(document.querySelector('meta[name="checkout-url"]')||{}).content||"";
+  document.querySelectorAll("button[data-checkout]").forEach(function(b){
+    var target=window.MotorPixelCheckout.buildCheckoutUrl(url, location.search, b.getAttribute("data-checkout"));
+    if(!target) return;
+    b.disabled=false; b.removeAttribute("aria-disabled");
+    b.addEventListener("click",function(){ location.href=target; });
+  });
+
+  /* Barra fixa: aparece depois do primeiro botão, some quando a oferta está na tela. */
+  var bar=document.getElementById("bar"), top=document.querySelector(".hero .cta"), offer=document.getElementById("oferta");
+  if("IntersectionObserver" in window){
+    var pastTop=false, onOffer=false;
+    function upd(){ var on=pastTop&&!onOffer; bar.classList.toggle("on",on); bar.setAttribute("aria-hidden",on?"false":"true"); }
+    new IntersectionObserver(function(e){ pastTop=!e[0].isIntersecting && e[0].boundingClientRect.top<0; upd(); }).observe(top);
+    new IntersectionObserver(function(e){ onOffer=e[0].isIntersecting; upd(); }).observe(offer);
+  }
+})();
+</script>
+</body>
+</html>
