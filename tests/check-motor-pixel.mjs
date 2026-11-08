@@ -56,6 +56,10 @@ t("meta checkout-url é o checkout ao vivo do Motor Pixel", () => {
 t("a página não usa o checkout do ebook", () => {
   assert.ok(!/LcB04qZ/.test(html));
 });
+t("não mostra o aviso Checkout em breve", () => {
+  assert.ok(!/Checkout em breve/.test(html));
+  assert.ok(!/class="soon"/.test(html));
+});
 const buyButtons = [...html.matchAll(/<button[^>]*data-checkout="([^"]+)"[^>]*>/g)];
 t("há 4 botões de compra (topo, oferta, final, barra)", () => {
   assert.deepEqual(buyButtons.map((m) => m[1]).sort(), ["barra", "oferta", "vsl-final", "vsl-topo"]);
