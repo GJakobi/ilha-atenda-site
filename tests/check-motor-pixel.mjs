@@ -43,7 +43,31 @@ for (const ref of [...new Set(local)]) {
 for (const a of anchors) {
   t(`âncora existe: ${a}`, () => assert.ok(html.includes(`id="${a.slice(1)}"`)));
 }
-t("não há links externos http(s) na página", () => assert.deepEqual(external, []));
+const PIXEL_ID = "1447176216770002";
+const isMetaPixelImage = (ref) => {
+  let u;
+  try {
+    u = new URL(ref);
+  } catch {
+    return false;
+  }
+  return (
+    u.protocol === "https:" &&
+    u.hostname === "www.facebook.com" &&
+    u.pathname === "/tr" &&
+    u.searchParams.get("id") === PIXEL_ID &&
+    u.searchParams.get("ev") === "PageView" &&
+    u.searchParams.get("noscript") === "1"
+  );
+};
+const metaPixelImages = external.filter(isMetaPixelImage);
+const otherExternal = external.filter((r) => !isMetaPixelImage(r));
+t("não há links externos http(s) na página, salvo a imagem do pixel da Meta", () => {
+  assert.deepEqual(otherExternal, []);
+  assert.deepEqual(metaPixelImages, [
+    `https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`,
+  ]);
+});
 t("e-mail de suporte correto", () => assert.deepEqual(mail, ["mailto:contato@atenda.tech"]));
 
 // ---------- 2. checkout do Motor Pixel; o do ebook não entra nesta página ----------
@@ -74,6 +98,24 @@ for (const m of buyButtons) {
 t("nenhum <a> leva a checkout", () => {
   const anchorsHtml = [...html.matchAll(/<a\b[^>]*>/g)].map((m) => m[0]).join("\n");
   assert.ok(!/data-checkout|checkout/i.test(anchorsHtml));
+});
+t("Meta Pixel inicia e dispara PageView", () => {
+  assert.match(html, /fbq\(\s*['"]init['"]\s*,\s*['"]1447176216770002['"]\s*\)/);
+  assert.match(html, /fbq\(\s*['"]track['"]\s*,\s*['"]PageView['"]\s*\)/);
+});
+t("clique no CTA dispara InitiateCheckout e segue para o checkout", () => {
+  assert.match(html, /fbq\(\s*['"]track['"]\s*,\s*['"]InitiateCheckout['"]/);
+  assert.match(html, /content_name:\s*['"]Motor Pixel['"]/);
+  assert.match(html, /value:\s*97/);
+  assert.match(html, /currency:\s*['"]BRL['"]/);
+  assert.match(html, /location\.href\s*=\s*target/);
+});
+t("ebook, termos e privacidade continuam sem este pixel", () => {
+  for (const rel of ["index.html", "termos/index.html", "privacidade/index.html"]) {
+    const other = readFileSync(join(root, rel), "utf8");
+    assert.ok(!other.includes(PIXEL_ID), rel);
+    assert.ok(!/fbq\s*\(/.test(other), rel);
+  }
 });
 
 // ---------- 3. conteúdo obrigatório ----------
