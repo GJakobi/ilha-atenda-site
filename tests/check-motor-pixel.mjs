@@ -100,7 +100,9 @@ t("nenhum <a> leva a checkout", () => {
   assert.ok(!/data-checkout|checkout/i.test(anchorsHtml));
 });
 // ---------- 2b. correções da página (13/11): topo, barra, cupom, requisitos ----------
-const visible = html.replace(/<style[\s\S]*?<\/style>|<script[\s\S]*?<\/script>|<!--[\s\S]*?-->/g, "");
+const visible = html
+  .replace(/<style[\s\S]*?<\/style>|<script[\s\S]*?<\/script>|<!--[\s\S]*?-->/g, "")
+  .replace(/<pre class="prova-texto" id="prova-texto">[\s\S]*?<\/pre>/, "");
 t("bloco de preço e botão vêm antes do vídeo, com utm_content bf-topo", () => {
   const iTopo = html.indexOf('data-checkout="topo"');
   assert.ok(iTopo > -1 && iTopo < html.indexOf('id="vsl-video"'), "botão topo deve vir antes do vídeo");
@@ -144,6 +146,70 @@ t("ebook, termos e privacidade continuam sem este pixel", () => {
     assert.ok(!other.includes(PIXEL_ID), rel);
     assert.ok(!/fbq\s*\(/.test(other), rel);
   }
+});
+
+
+// ---------- 2c. bloco de prova (romanos), abaixo do VSL ----------
+const provaSection = html.match(/<section class="prova" id="prova">[\s\S]*?<\/section>/);
+t("bloco de prova vem logo abaixo do vídeo principal", () => {
+  assert.ok(provaSection, "seção #prova ausente");
+  const afterHero = html.indexOf("</section>", html.indexOf('id="vsl-video"'));
+  const rest = html.slice(afterHero + "</section>".length).trimStart();
+  assert.ok(rest.startsWith('<section class="prova" id="prova">'), "o bloco de prova deve ser a primeira seção depois do hero/VSL");
+});
+t("título e legenda da prova são os aprovados pela Estrategista", () => {
+  const block = provaSection[0];
+  assert.match(block, /<h2>Um pedido em português, um vídeo de 23 segundos<\/h2>/);
+  assert.match(block, /<p class="prova-cap">Feito com o Motor Pixel v1\.1 e o Claude Code, numa rodada só, sem edição depois do render\.<\/p>/);
+  assert.ok(!/PLACEHOLDER ESTRATEGISTA/.test(html));
+});
+t("no celular o vídeo da prova vem antes do pedido; no desktop o pedido fica à esquerda", () => {
+  const block = provaSection[0];
+  const iVideo = block.indexOf('class="prova-video"');
+  const iPedido = block.indexOf('class="prova-pedido"');
+  assert.ok(iVideo > -1 && iPedido > -1 && iVideo < iPedido, "no HTML (fluxo móvel) o vídeo deve vir antes do pedido");
+  assert.match(html, /\.prova-pedido\{[^}]*grid-column:1/);
+  assert.match(html, /\.prova-video\{[^}]*grid-column:2/);
+  assert.match(html, /\.prova-texto\{[^}]*max-height:260px/);
+  assert.match(html, /@media \(min-width:760px\)\{[^]*\.prova-texto\{[^}]*max-height:none/);
+});
+t("vídeo de prova tem poster, playsinline, controls, preload e sem autoplay", () => {
+  const block = provaSection[0];
+  assert.match(block, /<video[^>]*src="prova-romanos.mp4"/);
+  assert.match(block, /<video[^>]*poster="prova-romanos.jpg"/);
+  assert.match(block, /<video[^>]*playsinline/);
+  assert.match(block, /<video[^>]*\scontrols(\s|>)/);
+  assert.match(block, /preload="(?:none|metadata)"/);
+  assert.ok(!/\sautoplay(\s|>)/i.test(block), "não deve haver autoplay no vídeo de prova");
+});
+t("vídeo de prova pesa no máximo 4 MB e tem faststart", () => {
+  const f = join(pageDir, "prova-romanos.mp4");
+  assert.ok(statSync(f).size <= 4 * 1024 * 1024, `arquivo tem ${statSync(f).size} bytes`);
+  const head = readFileSync(f).subarray(0, 64 * 1024);
+  const moov = head.indexOf("moov");
+  const mdat = head.indexOf("mdat");
+  assert.ok(moov > -1 && (mdat === -1 || moov < mdat), "moov deve vir antes de mdat");
+});
+t("pedido da prova está verbatim, inclusive “desta máquina”", () => {
+  const pre = html.match(/<pre class="prova-texto" id="prova-texto">([\s\S]*?)<\/pre>/);
+  assert.ok(pre, "pre#prova-texto ausente");
+  const expected = `Li o MANUAL.md e o SKILL.md desta pasta (Motor Pixel v1.1). Quero que você siga o SKILL.md do começo ao fim e produza o vídeo.
+
+Tema e título: Como os romanos construíam estradas.
+
+Cena: uma paisagem do campo italiano na época romana. Agrimensores usam a groma para marcar uma linha reta. Em seguida, operários abrem uma vala e preenchem em camadas (pedra grossa, cascalho, blocos no topo). No final, a via pavimentada corre reta até o horizonte, com o centro mais alto. Personagens visíveis: agrimensores com a groma, operários com ferramentas, a estrada em construção. Artes 100% originais, estilo pixel. Não copie personagens, mapas, paletas ou roteiros de nenhum outro perfil ou projeto. Não importe código, sprites ou áudio de outras pastas desta máquina.
+
+Duração: entre 20 e 30 segundos. Formato vertical 1080×1920, 30 fps, com legendas em português do Brasil.
+
+Narração (use exatamente este texto, em português do Brasil):
+
+"Os romanos não improvisavam uma estrada. Primeiro, os agrimensores traçavam uma linha reta com a groma. Depois vinha a vala, preenchida em camadas: pedra grossa na base, cascalho no meio, e no topo um piso de blocos, mais alto no centro, para a chuva escorrer. Dois mil anos depois, muitas dessas vias ainda estão lá."
+
+Voz: use o cliente edge-tts, sem nenhuma API paga. Prefira uma voz em português brasileiro (por exemplo pt-BR-AntonioNeural ou pt-BR-FranciscaNeural). Se precisar listar as vozes, pode listar. Siga o caminho do SKILL.md com Communicate(..., boundary="WordBoundary") + SubMaker. Não invente flags de CLI. Só depois meça a duração com ffprobe e defina durationInFrames.
+
+Siga a sequência do SKILL.md: entradas.json, sprites originais com ciclo de caminhada, Composition Episode (sem apagar PlaceholderTest), ep.json, legendas palavra a palavra, mix com loudness medida, render de Episode em build/episode.mp4, depois ffprobe, ebur128 e folha de contato. Trabalhe só nesta pasta do kit. Quando terminar, diga o caminho do MP4, a duração medida, a voz usada e o que passou ou ficou NÃO TESTADO.`;
+  assert.equal(pre[1], expected);
+  assert.match(pre[1], /desta máquina/);
 });
 
 // ---------- 3. conteúdo obrigatório ----------
