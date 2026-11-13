@@ -106,7 +106,7 @@ t("Meta Pixel inicia e dispara PageView", () => {
 t("clique no CTA dispara InitiateCheckout e segue para o checkout", () => {
   assert.match(html, /fbq\(\s*['"]track['"]\s*,\s*['"]InitiateCheckout['"]/);
   assert.match(html, /content_name:\s*['"]Motor Pixel['"]/);
-  assert.match(html, /value:\s*97/);
+  assert.match(html, /value:\s*47/); // BF até 27/11; reverter p/ 97 em 28/11
   assert.match(html, /currency:\s*['"]BRL['"]/);
   assert.match(html, /location\.href\s*=\s*target/);
 });
