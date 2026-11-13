@@ -260,12 +260,7 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
     b.addEventListener("click", function () {
       try {
         if (typeof fbq === "function") {
-          fbq("track", "InitiateCheckout", {
-            content_name: "Motor Pixel",
-            content_ids: [b.getAttribute("data-checkout") || ""],
-            value: 47,
-            currency: "BRL",
-          });
+          fbq("trackCustom", "ClickCheckout", { value: 47, currency: "BRL" });
         }
       } catch (e) {}
       location.href = target;

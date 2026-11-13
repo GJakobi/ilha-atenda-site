@@ -103,11 +103,9 @@ t("Meta Pixel inicia e dispara PageView", () => {
   assert.match(html, /fbq\(\s*['"]init['"]\s*,\s*['"]1447176216770002['"]\s*\)/);
   assert.match(html, /fbq\(\s*['"]track['"]\s*,\s*['"]PageView['"]\s*\)/);
 });
-t("clique no CTA dispara InitiateCheckout e segue para o checkout", () => {
-  assert.match(html, /fbq\(\s*['"]track['"]\s*,\s*['"]InitiateCheckout['"]/);
-  assert.match(html, /content_name:\s*['"]Motor Pixel['"]/);
-  assert.match(html, /value:\s*47/); // BF até 27/11; reverter p/ 97 em 28/11
-  assert.match(html, /currency:\s*['"]BRL['"]/);
+t("clique no CTA dispara o evento custom ClickCheckout (não o InitiateCheckout) e segue para o checkout", () => {
+  assert.match(html, /fbq\(\s*['"]trackCustom['"]\s*,\s*['"]ClickCheckout['"]\s*,\s*\{\s*value:\s*47\s*,\s*currency:\s*['"]BRL['"]\s*\}\s*\)/); // BF até 27/11; reverter value p/ 97 em 28/11
+  assert.ok(!/fbq\(\s*['"]track['"]\s*,\s*['"]InitiateCheckout['"]/.test(html), "o IC padrão deve vir só do checkout da Kiwify");
   assert.match(html, /location\.href\s*=\s*target/);
 });
 t("ebook, termos e privacidade continuam sem este pixel", () => {
