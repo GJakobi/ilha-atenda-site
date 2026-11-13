@@ -281,12 +281,13 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
     });
   });
 
-  /* Barra fixa: visível desde o carregamento; some só quando a oferta está na tela. */
-  var bar=document.getElementById("bar"), offer=document.getElementById("oferta");
+  /* Barra fixa: visível desde o carregamento; some só enquanto o bloco do topo ou a oferta estão na tela. */
+  var bar=document.getElementById("bar"), topo=document.getElementById("topo"), offer=document.getElementById("oferta");
   if("IntersectionObserver" in window){
-    new IntersectionObserver(function(e){
-      var on=!e[0].isIntersecting; bar.classList.toggle("on",on); bar.setAttribute("aria-hidden",on?"false":"true");
-    }).observe(offer);
+    var onTopo=false, onOffer=false;
+    function upd(){ var on=!onTopo&&!onOffer; bar.classList.toggle("on",on); bar.setAttribute("aria-hidden",on?"false":"true"); }
+    new IntersectionObserver(function(e){ onTopo=e[0].isIntersecting; upd(); }).observe(topo);
+    new IntersectionObserver(function(e){ onOffer=e[0].isIntersecting; upd(); }).observe(offer);
   }
 })();
 </script>

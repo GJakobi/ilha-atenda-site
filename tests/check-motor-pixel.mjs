@@ -111,6 +111,8 @@ t("bloco de preço e botão vêm antes do vídeo, com utm_content bf-topo", () =
 t("barra fixa já nasce visível (class on), sem esperar rolagem", () => {
   assert.match(html, /<div class="bar on" id="bar" aria-hidden="false"/);
   assert.ok(!/pastTop/.test(html), "a lógica de esperar o primeiro botão saiu");
+  assert.match(html, /getElementById\("topo"\)/); // a barra some enquanto o bloco do topo está na tela
+  assert.match(html, /\.observe\(topo\)/);
   assert.match(html, /R\$&nbsp;47 à vista<small>de R\$&nbsp;97 · até 27\/11<\/small>/);
 });
 t("sem a linha de dúvida do cupom", () => {
