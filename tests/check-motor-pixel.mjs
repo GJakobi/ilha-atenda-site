@@ -157,6 +157,22 @@ t("bloco de prova vem logo abaixo do vídeo principal", () => {
   const rest = html.slice(afterHero + "</section>".length).trimStart();
   assert.ok(rest.startsWith('<section class="prova" id="prova">'), "o bloco de prova deve ser a primeira seção depois do hero/VSL");
 });
+t("título e legenda da prova são os aprovados pela Estrategista", () => {
+  const block = provaSection[0];
+  assert.match(block, /<h2>Um pedido em português, um vídeo de 23 segundos<\/h2>/);
+  assert.match(block, /<p class="prova-cap">Feito com o Motor Pixel v1\.1 e o Claude Code, numa rodada só, sem edição depois do render\.<\/p>/);
+  assert.ok(!/PLACEHOLDER ESTRATEGISTA/.test(html));
+});
+t("no celular o vídeo da prova vem antes do pedido; no desktop o pedido fica à esquerda", () => {
+  const block = provaSection[0];
+  const iVideo = block.indexOf('class="prova-video"');
+  const iPedido = block.indexOf('class="prova-pedido"');
+  assert.ok(iVideo > -1 && iPedido > -1 && iVideo < iPedido, "no HTML (fluxo móvel) o vídeo deve vir antes do pedido");
+  assert.match(html, /\.prova-pedido\{[^}]*grid-column:1/);
+  assert.match(html, /\.prova-video\{[^}]*grid-column:2/);
+  assert.match(html, /\.prova-texto\{[^}]*max-height:260px/);
+  assert.match(html, /@media \(min-width:760px\)\{[^]*\.prova-texto\{[^}]*max-height:none/);
+});
 t("vídeo de prova tem poster, playsinline, controls, preload e sem autoplay", () => {
   const block = provaSection[0];
   assert.match(block, /<video[^>]*src="prova-romanos.mp4"/);

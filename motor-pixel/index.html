@@ -116,7 +116,8 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
 @media (min-width:760px){.desk-only{display:block}h1{font-size:40px}section{padding:60px 0}.cards{grid-template-columns:1fr 1fr 1fr}.bar{display:none}footer{padding-bottom:40px}}
 @media (prefers-reduced-motion:reduce){.sound .dot{animation:none}html{scroll-behavior:auto}.bar{transition:none}}
 
-/* bloco de prova: pedido + vídeo (título e legenda provisórios — Estrategista) */
+/* bloco de prova: pedido + vídeo */
+.prova{--prova-video-w:240px}
 .prova .wrap{max-width:880px}
 .prova-cap{margin:0 0 20px;color:var(--muted);font-size:16px}
 .prova-grid{display:flex;flex-direction:column;gap:20px;align-items:stretch}
@@ -125,11 +126,10 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
 .prova-pedido-head span{font:700 12px/1 "Silk",monospace;letter-spacing:1px;color:var(--muted)}
 .prova-copy{appearance:none;border:1px solid var(--line);background:#fff;color:var(--escuro);font:800 13px/1 "Nunito",sans-serif;padding:8px 12px;border-radius:8px;cursor:pointer}
 .prova-copy:focus-visible{outline:2px solid var(--laranja);outline-offset:2px}
-.prova-texto{margin:0;max-height:min(420px,70vh);overflow:auto;scrollbar-gutter:stable;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font:400 13px/1.55 "Nunito",ui-monospace,monospace;color:var(--ink)}.prova-texto::-webkit-scrollbar{width:8px}.prova-texto::-webkit-scrollbar-track{background:var(--creme)}.prova-texto::-webkit-scrollbar-thumb{background:#c4c0b4;border-radius:8px}
+.prova-texto{margin:0;max-height:260px;overflow:auto;scrollbar-gutter:stable;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font:400 13px/1.55 "Nunito",ui-monospace,monospace;color:var(--ink)}.prova-texto::-webkit-scrollbar{width:8px}.prova-texto::-webkit-scrollbar-track{background:var(--creme)}.prova-texto::-webkit-scrollbar-thumb{background:#c4c0b4;border-radius:8px}
 .prova-video{width:min(100%,240px);margin:0 auto;border-radius:14px;overflow:hidden;background:#000;border:3px solid var(--amarelo);box-shadow:0 0 0 3px var(--escuro),0 8px 0 3px #000}
 .prova-video video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}
-.prova{--prova-video-w:240px}
-@media (min-width:760px){.prova-grid{display:grid;grid-template-columns:minmax(0,1fr) var(--prova-video-w);gap:24px;align-items:start}.prova-pedido{height:calc((var(--prova-video-w) - 6px) * 16 / 9 + 6px)}.prova-texto{flex:1;min-height:0;max-height:none}.prova-video{width:var(--prova-video-w);margin:0}}
+@media (min-width:760px){.prova-grid{display:grid;grid-template-columns:minmax(0,1fr) var(--prova-video-w);gap:24px;align-items:start}.prova-pedido{grid-column:1;grid-row:1;height:calc((var(--prova-video-w) - 6px) * 16 / 9 + 6px)}.prova-texto{flex:1;min-height:0;max-height:none}.prova-video{grid-column:2;grid-row:1;width:var(--prova-video-w);margin:0}}
 </style>
 </head>
 <body>
@@ -164,10 +164,12 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
 
 <section class="prova" id="prova">
   <div class="wrap">
-    <!-- PLACEHOLDER ESTRATEGISTA: título e legenda provisórios; o copy deste bloco é da Estrategista. O pedido abaixo está verbatim (inclui “desta máquina”; não alterar). -->
-    <h2>Um pedido, um vídeo</h2>
-    <p class="prova-cap">Feito com o kit, sem edição depois do render.</p>
+    <h2>Um pedido em português, um vídeo de 23 segundos</h2>
+    <p class="prova-cap">Feito com o Motor Pixel v1.1 e o Claude Code, numa rodada só, sem edição depois do render.</p>
     <div class="prova-grid">
+      <figure class="prova-video">
+        <video src="prova-romanos.mp4" poster="prova-romanos.jpg" playsinline controls preload="none" aria-label="Vídeo de prova: Como os romanos construíam estradas"></video>
+      </figure>
       <div class="prova-pedido">
         <div class="prova-pedido-head">
           <span>O pedido</span>
@@ -189,9 +191,6 @@ Voz: use o cliente edge-tts, sem nenhuma API paga. Prefira uma voz em português
 
 Siga a sequência do SKILL.md: entradas.json, sprites originais com ciclo de caminhada, Composition Episode (sem apagar PlaceholderTest), ep.json, legendas palavra a palavra, mix com loudness medida, render de Episode em build/episode.mp4, depois ffprobe, ebur128 e folha de contato. Trabalhe só nesta pasta do kit. Quando terminar, diga o caminho do MP4, a duração medida, a voz usada e o que passou ou ficou NÃO TESTADO.</pre>
       </div>
-      <figure class="prova-video">
-        <video src="prova-romanos.mp4" poster="prova-romanos.jpg" playsinline controls preload="none" aria-label="Vídeo de prova: Como os romanos construíam estradas"></video>
-      </figure>
     </div>
   </div>
 </section>
