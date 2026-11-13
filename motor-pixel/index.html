@@ -115,6 +115,21 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
 .bar .cta{margin:0;padding:13px 10px;font-size:15px;box-shadow:0 4px 0 #a9a392}
 @media (min-width:760px){.desk-only{display:block}h1{font-size:40px}section{padding:60px 0}.cards{grid-template-columns:1fr 1fr 1fr}.bar{display:none}footer{padding-bottom:40px}}
 @media (prefers-reduced-motion:reduce){.sound .dot{animation:none}html{scroll-behavior:auto}.bar{transition:none}}
+
+/* bloco de prova: pedido + vídeo (título e legenda provisórios — Estrategista) */
+.prova .wrap{max-width:880px}
+.prova-cap{margin:0 0 20px;color:var(--muted);font-size:16px}
+.prova-grid{display:flex;flex-direction:column;gap:20px;align-items:stretch}
+.prova-pedido{display:flex;flex-direction:column;min-width:0}
+.prova-pedido-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.prova-pedido-head span{font:700 12px/1 "Silk",monospace;letter-spacing:1px;color:var(--muted)}
+.prova-copy{appearance:none;border:1px solid var(--line);background:#fff;color:var(--escuro);font:800 13px/1 "Nunito",sans-serif;padding:8px 12px;border-radius:8px;cursor:pointer}
+.prova-copy:focus-visible{outline:2px solid var(--laranja);outline-offset:2px}
+.prova-texto{margin:0;max-height:min(420px,70vh);overflow:auto;scrollbar-gutter:stable;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font:400 13px/1.55 "Nunito",ui-monospace,monospace;color:var(--ink)}.prova-texto::-webkit-scrollbar{width:8px}.prova-texto::-webkit-scrollbar-track{background:var(--creme)}.prova-texto::-webkit-scrollbar-thumb{background:#c4c0b4;border-radius:8px}
+.prova-video{width:min(100%,240px);margin:0 auto;border-radius:14px;overflow:hidden;background:#000;border:3px solid var(--amarelo);box-shadow:0 0 0 3px var(--escuro),0 8px 0 3px #000}
+.prova-video video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}
+.prova{--prova-video-w:240px}
+@media (min-width:760px){.prova-grid{display:grid;grid-template-columns:minmax(0,1fr) var(--prova-video-w);gap:24px;align-items:start}.prova-pedido{height:calc((var(--prova-video-w) - 6px) * 16 / 9 + 6px)}.prova-texto{flex:1;min-height:0;max-height:none}.prova-video{width:var(--prova-video-w);margin:0}}
 </style>
 </head>
 <body>
@@ -143,6 +158,40 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
     <div class="desk-only">
       <button class="cta" type="button" disabled aria-disabled="true" data-checkout="vsl-topo">Quero o Motor Pixel</button>
       <span class="cta-small"><s>R$&nbsp;97</s> R$&nbsp;47 · pagamento único · 7 dias de garantia · atualizações por 1 ano</span><!--BF-->
+    </div>
+  </div>
+</section>
+
+<section class="prova" id="prova">
+  <div class="wrap">
+    <!-- PLACEHOLDER ESTRATEGISTA: título e legenda provisórios; o copy deste bloco é da Estrategista. O pedido abaixo está verbatim (inclui “desta máquina”; não alterar). -->
+    <h2>Um pedido, um vídeo</h2>
+    <p class="prova-cap">Feito com o kit, sem edição depois do render.</p>
+    <div class="prova-grid">
+      <div class="prova-pedido">
+        <div class="prova-pedido-head">
+          <span>O pedido</span>
+          <button type="button" class="prova-copy" id="prova-copy" aria-controls="prova-texto">Copiar</button>
+        </div>
+        <pre class="prova-texto" id="prova-texto">Li o MANUAL.md e o SKILL.md desta pasta (Motor Pixel v1.1). Quero que você siga o SKILL.md do começo ao fim e produza o vídeo.
+
+Tema e título: Como os romanos construíam estradas.
+
+Cena: uma paisagem do campo italiano na época romana. Agrimensores usam a groma para marcar uma linha reta. Em seguida, operários abrem uma vala e preenchem em camadas (pedra grossa, cascalho, blocos no topo). No final, a via pavimentada corre reta até o horizonte, com o centro mais alto. Personagens visíveis: agrimensores com a groma, operários com ferramentas, a estrada em construção. Artes 100% originais, estilo pixel. Não copie personagens, mapas, paletas ou roteiros de nenhum outro perfil ou projeto. Não importe código, sprites ou áudio de outras pastas desta máquina.
+
+Duração: entre 20 e 30 segundos. Formato vertical 1080×1920, 30 fps, com legendas em português do Brasil.
+
+Narração (use exatamente este texto, em português do Brasil):
+
+"Os romanos não improvisavam uma estrada. Primeiro, os agrimensores traçavam uma linha reta com a groma. Depois vinha a vala, preenchida em camadas: pedra grossa na base, cascalho no meio, e no topo um piso de blocos, mais alto no centro, para a chuva escorrer. Dois mil anos depois, muitas dessas vias ainda estão lá."
+
+Voz: use o cliente edge-tts, sem nenhuma API paga. Prefira uma voz em português brasileiro (por exemplo pt-BR-AntonioNeural ou pt-BR-FranciscaNeural). Se precisar listar as vozes, pode listar. Siga o caminho do SKILL.md com Communicate(..., boundary="WordBoundary") + SubMaker. Não invente flags de CLI. Só depois meça a duração com ffprobe e defina durationInFrames.
+
+Siga a sequência do SKILL.md: entradas.json, sprites originais com ciclo de caminhada, Composition Episode (sem apagar PlaceholderTest), ep.json, legendas palavra a palavra, mix com loudness medida, render de Episode em build/episode.mp4, depois ffprobe, ebur128 e folha de contato. Trabalhe só nesta pasta do kit. Quando terminar, diga o caminho do MP4, a duração medida, a voz usada e o que passou ou ficou NÃO TESTADO.</pre>
+      </div>
+      <figure class="prova-video">
+        <video src="prova-romanos.mp4" poster="prova-romanos.jpg" playsinline controls preload="none" aria-label="Vídeo de prova: Como os romanos construíam estradas"></video>
+      </figure>
     </div>
   </div>
 </section>
@@ -280,6 +329,35 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
       location.href = target;
     });
   });
+
+
+  /* Copiar o pedido da prova. */
+  var copyBtn=document.getElementById("prova-copy"), pedido=document.getElementById("prova-texto");
+  if(copyBtn&&pedido){
+    copyBtn.addEventListener("click",function(){
+      var text=pedido.textContent, prev=copyBtn.textContent;
+      var done=function(){ copyBtn.textContent="Copiado"; setTimeout(function(){ copyBtn.textContent=prev; },1600); };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){
+          try{
+            var ta=document.createElement("textarea");
+            ta.value=text; ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.left="-9999px";
+            document.body.appendChild(ta); ta.select();
+            if(document.execCommand("copy")) done();
+            document.body.removeChild(ta);
+          }catch(e){}
+        });
+      }else{
+        try{
+          var ta=document.createElement("textarea");
+          ta.value=text; ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.left="-9999px";
+          document.body.appendChild(ta); ta.select();
+          if(document.execCommand("copy")) done();
+          document.body.removeChild(ta);
+        }catch(e){}
+      }
+    });
+  }
 
   /* Barra fixa: visível desde o carregamento; some só enquanto o bloco do topo ou a oferta estão na tela. */
   var bar=document.getElementById("bar"), topo=document.getElementById("topo"), offer=document.getElementById("oferta");
