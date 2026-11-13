@@ -86,8 +86,8 @@ t("com checkout configurado, a página não diz em breve", () => {
   assert.match(html, /data-checkout="barra"[^>]*>Comprar agora</);
 });
 const buyButtons = [...html.matchAll(/<button[^>]*data-checkout="([^"]+)"[^>]*>/g)];
-t("há 4 botões de compra (topo, oferta, final, barra)", () => {
-  assert.deepEqual(buyButtons.map((m) => m[1]).sort(), ["barra", "oferta", "vsl-final", "vsl-topo"]);
+t("há 5 botões de compra (topo antes do vídeo, vsl-topo no desktop, oferta, final, barra)", () => {
+  assert.deepEqual(buyButtons.map((m) => m[1]).sort(), ["barra", "oferta", "topo", "vsl-final", "vsl-topo"]);
 });
 for (const m of buyButtons) {
   t(`botão ${m[1]} está desativado e não é link`, () => {
@@ -98,6 +98,36 @@ for (const m of buyButtons) {
 t("nenhum <a> leva a checkout", () => {
   const anchorsHtml = [...html.matchAll(/<a\b[^>]*>/g)].map((m) => m[0]).join("\n");
   assert.ok(!/data-checkout|checkout/i.test(anchorsHtml));
+});
+// ---------- 2b. correções da página (13/11): topo, barra, cupom, requisitos ----------
+const visible = html.replace(/<style[\s\S]*?<\/style>|<script[\s\S]*?<\/script>|<!--[\s\S]*?-->/g, "");
+t("bloco de preço e botão vêm antes do vídeo, com utm_content bf-topo", () => {
+  const iTopo = html.indexOf('data-checkout="topo"');
+  assert.ok(iTopo > -1 && iTopo < html.indexOf('id="vsl-video"'), "botão topo deve vir antes do vídeo");
+  assert.match(html, /data-checkout="topo"[^>]*data-utm="bf-topo"/);
+  assert.match(html, /R\$&nbsp;47 à vista/);
+  assert.match(html, /getAttribute\("data-utm"\) \|\| "bf-preco"/);
+});
+t("barra fixa já nasce visível (class on), sem esperar rolagem", () => {
+  assert.match(html, /<div class="bar on" id="bar" aria-hidden="false"/);
+  assert.ok(!/pastTop/.test(html), "a lógica de esperar o primeiro botão saiu");
+  assert.match(html, /getElementById\("topo"\)/); // a barra some enquanto o bloco do topo está na tela
+  assert.match(html, /\.observe\(topo\)/);
+  assert.match(html, /R\$&nbsp;47 à vista<small>de R\$&nbsp;97 · até 27\/11<\/small>/);
+});
+t("sem a linha de dúvida do cupom", () => {
+  assert.ok(!/Se o desconto não aparecer/.test(html));
+  assert.ok(!/Tem um cupom de desconto/.test(html));
+  assert.ok(!/bf-hint/.test(html));
+});
+t("requisitos: 3 itens, sem computador, Windows ou Mac, e FAQ de sistema removido", () => {
+  const need = html.match(/<ul class="need">([\s\S]*?)<\/ul>/)[1];
+  assert.equal((need.match(/<li>/g) || []).length, 3);
+  assert.ok(!/computador|windows|\bmac\b|celular|smartphone|notebook|laptop/i.test(visible), "menção a dispositivo/sistema na página");
+  assert.ok(!/Funciona no Windows ou no Mac/.test(html));
+});
+t("copy: sem a palavra 'garantido'", () => {
+  assert.ok(!/\bgarantido\b/i.test(visible));
 });
 t("Meta Pixel inicia e dispara PageView", () => {
   assert.match(html, /fbq\(\s*['"]init['"]\s*,\s*['"]1447176216770002['"]\s*\)/);
