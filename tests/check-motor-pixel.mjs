@@ -75,7 +75,7 @@ const CHECKOUT = "https://pay.kiwify.com.br/xDfB7ss";
 t("meta checkout-url é o checkout ao vivo do Motor Pixel", () => {
   const m = html.match(/<meta name="checkout-url" content="([^"]*)">/);
   assert.ok(m, "meta ausente");
-  assert.equal(m[1], CHECKOUT);
+  assert.equal(m[1], CHECKOUT + "?coupon=BLACK47"); // janela Black Friday até 27/11; voltar a CHECKOUT em 28/11
 });
 t("a página não usa o checkout do ebook", () => {
   assert.ok(!/LcB04qZ/.test(html));
