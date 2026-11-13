@@ -61,6 +61,14 @@ strong{font-weight:800}
 .sound .dot{width:12px;height:12px;background:var(--escuro);animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:.15}}
 .vsl-cap{text-align:center;font-size:13px;color:#94b0c2;margin:10px 0 0}
+/* bloco de preço e botão acima do vídeo (BF) */
+.topo{margin:20px 0 4px;text-align:center}
+.topo .kick{font:600 14px/1.3 "Pixel",sans-serif;letter-spacing:.5px;color:var(--amarelo)}
+.topo .px{font:600 40px/1.1 "Pixel",sans-serif;color:var(--amarelo);margin:6px 0 0}
+.topo .px s{font-size:.55em;color:#AFC0E0;margin-right:8px}
+.topo .cta{margin:14px 0 10px}
+.topo .cta-small{color:#AFC0E0}
+.desk-only{display:none}
 /* botões de compra (desativados até existir checkout) */
 .cta{display:block;width:100%;text-align:center;background:var(--amarelo);color:var(--escuro);font:800 18px/1.25 "Nunito",sans-serif;border:0;padding:18px 16px;border-radius:14px;box-shadow:0 6px 0 #C9963F;margin:20px 0 10px;text-transform:uppercase;letter-spacing:.2px;cursor:pointer}
 .cta:active:not(:disabled){transform:translateY(3px);box-shadow:0 3px 0 #C9963F}
@@ -88,7 +96,6 @@ strong{font-weight:800}
 .offer li::before{content:"";position:absolute;left:4px;top:.55em;width:12px;height:12px;background:var(--verde)}
 .bf-banner{background:var(--amarelo);color:var(--escuro);text-align:center;font:800 14px/1.3 "Nunito",sans-serif;padding:10px 14px}
 .price s{font-size:.5em;color:#AFC0E0;margin-right:10px}
-.bf-hint{display:block;text-align:center;font-size:14px;color:#AFC0E0}
 .offer h3,.offer h4{color:#fff}
 .guarantee{background:var(--creme)}
 .faq details{background:#fff;border:1px solid var(--line);border-radius:12px;margin:0 0 10px;padding:0 16px}
@@ -106,7 +113,7 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
 .bar .p{color:#fff;font:600 22px/1 "Pixel",sans-serif;white-space:nowrap}
 .bar .p small{display:block;font:700 11px/1.2 "Nunito",sans-serif;color:#AFC0E0;margin-top:3px}
 .bar .cta{margin:0;padding:13px 10px;font-size:15px;box-shadow:0 4px 0 #a9a392}
-@media (min-width:760px){h1{font-size:40px}section{padding:60px 0}.cards{grid-template-columns:1fr 1fr 1fr}.bar{display:none}footer{padding-bottom:40px}}
+@media (min-width:760px){.desk-only{display:block}h1{font-size:40px}section{padding:60px 0}.cards{grid-template-columns:1fr 1fr 1fr}.bar{display:none}footer{padding-bottom:40px}}
 @media (prefers-reduced-motion:reduce){.sound .dot{animation:none}html{scroll-behavior:auto}.bar{transition:none}}
 </style>
 </head>
@@ -120,14 +127,23 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
     <h1>Faça o Claude ou o ChatGPT criar vídeos curtos em pixel art no seu tema</h1>
     <p class="sub">O Motor Pixel traz a Skill, o andaime e o manual que guiam o Claude ou o ChatGPT a construir o motor, a arte e a voz do seu vídeo.</p>
 
+    <div class="topo" id="topo"><!--BF-->
+      <div class="kick">Black Friday · até 27/11</div><!--BF-->
+      <div class="px"><s>R$&nbsp;97</s>R$&nbsp;47 à vista</div><!--BF-->
+      <button class="cta" type="button" disabled aria-disabled="true" data-checkout="topo" data-utm="bf-topo">Quero o Motor Pixel por R$&nbsp;47</button><!--BF-->
+      <span class="cta-small">Pagamento único · 7 dias de garantia · atualizações por 1 ano</span>
+    </div>
+
     <div class="vsl" id="vsl">
       <video id="vsl-video" src="vsl.mp4" poster="poster.jpg" muted playsinline preload="metadata" aria-label="Vídeo de apresentação do Motor Pixel"></video>
       <button class="sound" id="sound" type="button" hidden><span class="dot" aria-hidden="true"></span>Toque para ouvir</button>
     </div>
     <p class="vsl-cap">Vídeo de 52 s · com legenda</p>
 
-    <button class="cta" type="button" disabled aria-disabled="true" data-checkout="vsl-topo">Quero o Motor Pixel</button>
-    <span class="cta-small"><s>R$&nbsp;97</s> R$&nbsp;47 · pagamento único · 7 dias de garantia · atualizações por 1 ano</span>
+    <div class="desk-only">
+      <button class="cta" type="button" disabled aria-disabled="true" data-checkout="vsl-topo">Quero o Motor Pixel</button>
+      <span class="cta-small"><s>R$&nbsp;97</s> R$&nbsp;47 · pagamento único · 7 dias de garantia · atualizações por 1 ano</span><!--BF-->
+    </div>
   </div>
 </section>
 
@@ -158,9 +174,9 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
   <div class="wrap">
     <h2>O que você precisa</h2>
     <ul class="need">
-      <li><strong>Claude Code</strong>, <strong>Claude Desktop com execução de código</strong> ou <strong>ChatGPT com execução de código (Codex)</strong>. O uso do Claude ou do ChatGPT é por sua conta, direto na Anthropic ou na OpenAI.</li>
-      <li>Um <strong>computador com Windows ou Mac</strong>, Node.js 18+, npm, Python 3.9+ e FFmpeg.</li>
-      <li><strong>Internet</strong> na instalação (pacotes npm e, na primeira renderização, um navegador).</li>
+      <li><strong>Claude ou ChatGPT com execução de código:</strong> Claude Code, Claude Desktop com execução de código ou Codex. A assinatura é paga à parte, direto na Anthropic ou na OpenAI.</li>
+      <li><strong>Node.js, Python e FFmpeg:</strong> são gratuitos, e o manual mostra a instalação passo a passo.</li>
+      <li><strong>Internet</strong> durante a instalação.</li>
     </ul>
     <p style="margin-top:14px"><strong>O que não vem no ZIP:</strong></p>
     <ul class="no">
@@ -176,7 +192,7 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
     <h2>Preço</h2>
     <h3>Black Friday · até 27/11</h3>
     <div class="price"><s>R$&nbsp;97</s>R$&nbsp;47</div>
-    <p>Com o cupom BLACK47, que já vem aplicado quando você clica no botão abaixo. Pagamento único, por Pix ou cartão. Vale até 27/11, às 23h59. Depois volta pra R$&nbsp;97.</p>
+    <p>Com o cupom BLACK47, que já vem aplicado no botão abaixo. R$&nbsp;47 à vista, pagamento único. Vale até 27/11, às 23h59. Depois volta pra R$&nbsp;97.</p>
     <h4>O que vem</h4>
     <ul>
       <li>Skill Motor Pixel</li>
@@ -188,7 +204,6 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
     <p>Se não funcionar pra você ou se você não gostar, peça o reembolso. Você recebe 100% do que pagou, sem precisar explicar o motivo.</p>
     <p>A assinatura da IA é paga à parte, direto pra ela.</p>
     <button class="cta" type="button" disabled aria-disabled="true" data-checkout="oferta">Quero o Motor Pixel por R$&nbsp;47</button>
-    <span class="bf-hint">Se o desconto não aparecer, clique em "Tem um cupom de desconto?" e digite BLACK47.</span>
   </div>
 </section>
 
@@ -206,7 +221,6 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
     <details><summary>Funciona no Claude e no ChatGPT?</summary><p>Funciona nos dois, desde que o assistente tenha execução de código: Claude Code, Claude Desktop com execução de código ou ChatGPT com execução de código (Codex). Em um chat comum, sem execução de código, o kit não arranca.</p></details>
     <details><summary>Preciso saber programar?</summary><p>Você não precisa escrever código: o assistente escreve. Mas precisa instalar Node.js e FFmpeg e seguir as instruções do manual, que mostra cada passo.</p></details>
     <details><summary>Já vem um vídeo pronto?</summary><p>Não. O ZIP traz o andaime e as instruções. O assistente constrói o motor e a arte no seu tema e renderiza o vídeo.</p></details>
-    <details><summary>Funciona no Windows ou no Mac?</summary><p>Sim. Funciona no Windows e no Mac.</p></details>
     <details><summary>Vou viralizar ou ganhar dinheiro com isso?</summary><p>Não dá para prometer. O kit ajuda a produzir o vídeo. O alcance depende do seu tema, da sua constância e de coisas que ninguém controla.</p></details>
     <details><summary>A voz vem incluída?</summary><p>Não vem áudio. O manual documenta uma opção gratuita de voz, o cliente edge-tts, que você instala por conta própria e que tem a própria licença.</p></details>
     <details><summary>Posso usar os vídeos para vender ou postar?</summary><p>A responsabilidade de conferir as licenças das ferramentas, fontes, vozes e músicas é sua. O ZIP explica o que checar, mas não é parecer jurídico.</p></details>
@@ -229,9 +243,9 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
   </div>
 </footer>
 
-<div class="bar" id="bar" aria-hidden="true">
-  <div class="p">R$&nbsp;47<small>Black Friday · de R$&nbsp;97</small></div>
-  <button class="cta" type="button" disabled aria-disabled="true" tabindex="-1" data-checkout="barra">Comprar agora</button>
+<div class="bar on" id="bar" aria-hidden="false"><!--BF: barra visível desde o carregamento-->
+  <div class="p">R$&nbsp;47 à vista<small>de R$&nbsp;97 · até 27/11</small></div><!--BF-->
+  <button class="cta" type="button" disabled aria-disabled="true" data-checkout="barra">Comprar agora</button>
 </div>
 
 <script src="../assets/checkout.js"></script>
@@ -254,7 +268,7 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
   /* Botões de compra: só ativam quando houver URL de checkout. */
   var url=(document.querySelector('meta[name="checkout-url"]')||{}).content||"";
   document.querySelectorAll("button[data-checkout]").forEach(function(b){
-    var target=window.MotorPixelCheckout.buildCheckoutUrl(url, location.search, "bf-preco");
+    var target=window.MotorPixelCheckout.buildCheckoutUrl(url, location.search, b.getAttribute("data-utm") || "bf-preco");
     if(!target) return;
     b.disabled=false; b.removeAttribute("aria-disabled");
     b.addEventListener("click", function () {
@@ -267,13 +281,12 @@ footer p{margin:0 0 6px}footer a{color:var(--muted);text-underline-offset:2px}
     });
   });
 
-  /* Barra fixa: aparece depois do primeiro botão, some quando a oferta está na tela. */
-  var bar=document.getElementById("bar"), top=document.querySelector(".hero .cta"), offer=document.getElementById("oferta");
+  /* Barra fixa: visível desde o carregamento; some só quando a oferta está na tela. */
+  var bar=document.getElementById("bar"), offer=document.getElementById("oferta");
   if("IntersectionObserver" in window){
-    var pastTop=false, onOffer=false;
-    function upd(){ var on=pastTop&&!onOffer; bar.classList.toggle("on",on); bar.setAttribute("aria-hidden",on?"false":"true"); }
-    new IntersectionObserver(function(e){ pastTop=!e[0].isIntersecting && e[0].boundingClientRect.top<0; upd(); }).observe(top);
-    new IntersectionObserver(function(e){ onOffer=e[0].isIntersecting; upd(); }).observe(offer);
+    new IntersectionObserver(function(e){
+      var on=!e[0].isIntersecting; bar.classList.toggle("on",on); bar.setAttribute("aria-hidden",on?"false":"true");
+    }).observe(offer);
   }
 })();
 </script>
